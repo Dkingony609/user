@@ -1,5 +1,8 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:user/pages/display.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -30,7 +33,6 @@ class _HomeState extends State<Home> {
   String fullName = '';
   String userName = '';
   String email = '';
-  String phoneNumber = '';
   String track = '';
 
   Widget _buildFullName() {
@@ -44,11 +46,7 @@ class _HomeState extends State<Home> {
         }
         return null;
       },
-      onSaved: (dynamic value) {
-        setState(() {
-          fullName = value;
-        });
-      },
+      onChanged: (value) => fullName = value,
     );
   }
 
@@ -86,24 +84,6 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget _buildPhoneNumber() {
-    return TextFormField(
-      keyboardType: TextInputType.phone,
-      decoration: InputDecoration(
-        labelText: 'Phone Number',
-      ),
-      validator: (dynamic value) {
-        if (value.isEmpty) {
-          return 'Phone Number is required!';
-        }
-        return null;
-      },
-      onSaved: (dynamic value) {
-        phoneNumber = value;
-      },
-    );
-  }
-
   Widget _buildTrack() {
     return TextFormField(
       keyboardType: TextInputType.visiblePassword,
@@ -126,7 +106,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('User Demo'),
+        title: Text('HNG 8'),
         centerTitle: true,
         backgroundColor: Colors.teal,
       ),
@@ -139,7 +119,7 @@ class _HomeState extends State<Home> {
             children: [
               SizedBox(height: 20),
               Text(
-                'Welcome to the HNG Internship!',
+                'Welcome to the HNG [8] Internship!',
                 style: TextStyle(
                   fontSize: 20.0,
                 ),
@@ -148,15 +128,26 @@ class _HomeState extends State<Home> {
               _buildFullName(),
               _buildUserName(),
               _buildEmail(),
-              _buildPhoneNumber(),
               _buildTrack(),
               SizedBox(height: 50),
               ElevatedButton(
                 onPressed: () {
                   if (!_formKey.currentState!.validate()) {
                     return;
+                  } else {
+                    _formKey.currentState!.save();
                   }
-                  _formKey.currentState!.save();
+
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DisplayScreen(
+                        fullName: fullName,
+                        userName: userName,
+                        email: email,
+                        track: track,
+                      ),
+                  ));
                 },
                 style: ElevatedButton.styleFrom(
                   primary: Colors.teal,
@@ -164,7 +155,7 @@ class _HomeState extends State<Home> {
                 ),
                 child: Center(
                   child: Text(
-                    'Submit',
+                    'View Profile',
                     style: TextStyle(
                       fontSize: 20,
                     ),
@@ -195,11 +186,6 @@ class _HomeState extends State<Home> {
                   )
                 ],
               ),
-              Text(fullName),
-              Text(userName),
-              Text(email),
-              Text(phoneNumber),
-              Text(track),
             ],
           ),
         ),
