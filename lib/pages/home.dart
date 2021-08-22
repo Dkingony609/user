@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:user/pages/display.dart';
@@ -117,7 +115,6 @@ class _HomeState extends State<Home> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: 20),
               Text(
                 'Welcome to the HNG [8] Internship!',
                 style: TextStyle(
@@ -162,29 +159,29 @@ class _HomeState extends State<Home> {
                   ),
                 ),
               ),
-              Row(
-                children: [
-                  TextButton(
-                      onPressed: () {
-                        launchHNGURL();
-                      },
-                      child: Image.asset(
-                        'hng.png',
-                        height: 150,
-                        width: 150,
-                      )),
-                  SizedBox(width: 50),
-                  TextButton(
-                    onPressed: () {
-                      launchZuriURL();
-                    },
-                    child: Image.asset(
-                      'zuri.png',
-                      height: 150,
-                      width: 150,
+              Padding(
+                padding: EdgeInsets.all(20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    IconButton(
+                        onPressed: () {
+                          launchHNGURL();
+                        },
+                        icon: Icon(
+                          Icons.link,
+                          size: 27,
+                          color: Colors.blueAccent,
+                        ),
                     ),
-                  )
-                ],
+                    SizedBox(width: 10),
+                    Image.network(
+                      'https://i.postimg.cc/4N5bkk8g/zuri.png',
+                      width: 120,
+                    )
+                    // SizedBox(width: 5),
+                  ],
+                ),
               ),
             ],
           ),

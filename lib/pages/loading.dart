@@ -19,14 +19,20 @@ class _LoadingState extends State<Loading> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(height: 30,),
-            Image.asset('hng.png'),
+            Image.network(
+              'https://hng.tech/img/brand-logo.png',
+              width: 170,
+            ),
             SizedBox(height: 50),
             Text(
               'In Partnership with',
               style: TextStyle(color: Colors.black, fontSize: 17.0),
             ),
             SizedBox(height: 20),
-            Image.asset('zuri.png'),
+            Image.network(
+              'https://i.postimg.cc/4N5bkk8g/zuri.png',
+              width: 120,
+            ),
             SizedBox(height: 50),
              OutlinedButton(
                 onPressed: () {
